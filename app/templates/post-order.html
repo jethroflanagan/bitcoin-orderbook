@@ -1,0 +1,111 @@
+<div class="PostOrder">
+    <div class="PostOrder-background"
+        (click)="onClose()"
+    ></div>
+    <div class="PostOrder-content">
+        <form novalidate name="PostOrder"
+            [formGroup]="form"
+            (ngSubmit)="onSubmit(form)"
+        >
+            <text-input
+                label="Bitcoin amount"
+                [ngModel]="amount"
+                (ngModelChange)="onAmountChanged($event)"
+                formControlName="amount"
+                restrictNumber
+                type="number"
+            ></text-input>
+
+            <text-input
+                label="Price per Bitcoin (ZAR)"
+                [ngModel]="price"
+                (ngModelChange)="onPriceChanged($event)"
+                formControlName="price"
+                restrictNumber
+                type="number"
+            ></text-input>
+
+            <div class="PostOrder-costs PostOrder-costs--total">
+                <span class="PostOrder-costsCell PostOrder-costsLabel">
+                    <span *ngIf="mode === 'Buy'">Total cost</span>
+                    <span *ngIf="mode === 'Sell'">Sale total</span>
+                </span>
+                <span class="PostOrder-costsCell PostOrder-costsCurrency">{{total.currencyCode}}</span>
+                <span class="PostOrder-costsCell PostOrder-costsValue">{{total.value | money:true}}</span>
+            </div>
+            <div class="PostOrder-costs">
+                <span class="PostOrder-costsCell PostOrder-costsLabel">Fees</span>
+                <span class="PostOrder-costsCell PostOrder-costsCurrency">{{fees.currencyCode}}</span>
+                <span class="PostOrder-costsCell PostOrder-costsValue" [innerHtml]="fees.value | amount"></span>
+            </div>
+            <div class="PostOrder-costs PostOrder-costs--available">
+                <span class="PostOrder-costsCell PostOrder-costsLabel">Available funds</span>
+                <span class="PostOrder-costsCell PostOrder-costsCurrency">{{balance.currencyCode}}</span>
+                <span class="PostOrder-costsCell PostOrder-costsValue">
+                    {{balance.value | money:true}}
+                    <span *ngIf="validation.notEnoughFunds"
+                        class="ErrorLabel ErrorLabel--right"
+                    >
+                        <span class="ErrorLabel-content">
+                            You don't have enough funds
+                        </span>
+                    </span>
+                </span>
+            </div>
+            <div *ngIf="!isComplete">
+                <div class="PostOrder-buttons">
+                    <button type="submit"
+                        class="Button Button--primary"
+                        [disabled]="form.invalid || validation.notEnoughFunds || isLoading"
+                        (click)="onSubmit($event)"
+                        [ngClass]="{
+                            'Button--loading': isLoading
+                        }">
+                        <span *ngIf="!isLoading">{{mode}}</span>
+                        <span *ngIf="isLoading">
+                            <span>.</span>
+                            <span>.</span>
+                            <span>.</span>
+                        </span>
+                    </button>
+                    <button
+                        class="Button"
+                        [disabled]="isLoading"
+                        (click)="onClose($event)">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="isComplete && !errors"
+                class="PostOrder-complete">
+                <div class="PostOrder-completeMessage">
+                    The order to {{mode.toLowerCase()}} has been placed.
+                </div>
+                <div class="PostOrder-buttons">
+                    <button
+                        class="Button Button-primary"
+                        (click)="onClose($event)">
+                        Done
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="isComplete && errors"
+                class="PostOrder-complete">
+                <div class="PostOrder-completeMessage">Unable to place order.</div>
+                <div class="PostOrder-completeMessage PostOrder-completeMessage--error">{{errors}}</div>
+                <div class="PostOrder-buttons">
+                    <button
+                        class="Button Button-primary"
+                        (click)="onReattempt($event)">
+                        Try again
+                    </button>
+                    <button
+                        class="Button"
+                        (click)="onClose($event)">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

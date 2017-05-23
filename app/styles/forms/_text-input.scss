@@ -1,0 +1,84 @@
+.TextInput {
+    $anim: 0.3s ease-out;
+    position: relative;
+    padding: 20px 0 10px 0;
+    &-field {
+        border: none;
+        background: none;
+        width: 100%;
+        color: $textColor;
+        &:focus {
+            outline: none;
+        }
+    }
+    &-bar {
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: $baseColor;
+        position: absolute;
+    }
+    &-highlight {
+        display: none;
+        width: 0;
+        left: 50%;
+        height: 1px;
+        background: $primaryColor;
+        position: absolute;
+        transition:
+            $anim all;
+    }
+    .OrderList--bids &-highlight {
+        background: $bidColor;
+    }
+    .OrderList--asks &-highlight {
+        background: $askColor;
+    }
+
+    &-label {
+        position: absolute;
+        font-size: 1em;
+        top: 20px;
+        left: 0;
+        transition: top $anim, font-size $anim;
+        z-index: -1;
+    }
+    .OrderList--asks &-label {
+        color: $askHighlightColor;
+    }
+    .OrderList--bids &-label {
+        color: $bidHighlightColor;
+    }
+    // &-field:focus ~ &-highlight, &-field:valid ~ &-highlight {
+    &-field:focus ~ &-highlight {
+        display: block;
+        width: 100%;
+        left: 0;
+    }
+    // &-field:focus ~ &-label {
+    &--focus &-field ~ &-label {
+        top: 5px;
+        font-size: 0.8em;
+    }
+}
+
+// HACK not able to properly propogate validation from parent form into child components
+// i.e. ng-invalid doesn't get added to the actual input, as the validator only runs on top-level
+text-input.ng-invalid .TextInput {
+    &-highlight {
+        background: lighten($errorColor, 30%);
+    }
+    &-bar {
+        background: $errorColor;
+    }
+}
+
+// -------------------
+// General input stuff
+// -------------------
+// disable number spinners in webkit
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

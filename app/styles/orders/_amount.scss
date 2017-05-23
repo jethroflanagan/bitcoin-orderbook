@@ -1,0 +1,11 @@
+.Amount {
+    display: inline-flex; // don't take up full width, but drop spaces between characters
+}
+.Amount-integer {
+}
+.Amount-fractional {
+    opacity: 0.9;
+}
+.Amount-padded {
+    opacity: 0.3;
+}

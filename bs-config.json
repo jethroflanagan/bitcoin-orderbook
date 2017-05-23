@@ -1,0 +1,16 @@
+{
+  "port": 8000,
+  "open": false,
+  "injectChanges": true,
+  "files": ["./**/*.{html,htm,css,js}"],
+  "watchOptions": {
+    "ignored": "node_modules"
+  },
+  "server": {
+    "baseDir": "./",
+    "logLevel": "silent",
+    "middleware": {
+      "0": null
+    }
+  }
+}

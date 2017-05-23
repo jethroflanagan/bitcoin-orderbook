@@ -1,0 +1,10 @@
+html, body {
+  font-family: $font;
+}
+body {
+    background-color: $backgroundColor;
+}
+.App {
+    display: flex;
+    color: #ddd;
+}

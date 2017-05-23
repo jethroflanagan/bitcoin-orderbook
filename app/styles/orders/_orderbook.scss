@@ -1,0 +1,60 @@
+order-book {
+    width: 100%;
+}
+.Orderbook {
+    display: flex;
+    // max-width: 700px;
+    width: 100%;
+    flex-direction: column;
+    &-title {
+        padding: $padding;
+        // width: 100%;
+        background: rgba(0,0,0, 0.6);
+        text-transform: uppercase;
+        font-weight: normal;
+        font-size: 1.5em;
+        margin: 0;
+    }
+    &-header {
+        margin: 0;
+        display: flex;
+    }
+    &-loading {
+        padding: $padding;
+        span {
+            animation: $loadingBounceAnim;
+        }
+        span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        span:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+    }
+}
+
+// Moved out of orderlist here to handle tab-input
+.OrderList-title {
+    font-weight: 300;
+    padding: $padding / 2 $padding;
+    margin: 0;
+    background: rgba(0,0,0, 0.3);
+    font-size: .8em;
+    width: 50%;
+    box-sizing: border-box;
+    &--bids {
+        color: $bidColor;
+    }
+    &--asks {
+        color: $askColor;
+    }
+    &:first-child {
+        border-right: 1px solid rgba(0,0,0, 0.3);
+    }
+    &:last-child {
+        text-align: right;
+        @media (min-width: $bp) {
+            text-align: inherit;
+        }
+    }
+}

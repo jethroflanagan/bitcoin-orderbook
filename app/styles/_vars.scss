@@ -1,0 +1,32 @@
+$backgroundColor: #273542;
+$textColor: #ddd;
+$primaryColor: #2196F3;
+$primaryHighlightColor: lighten(#2196F3, 5%);
+
+$askColor: #2196F3;
+$askHighlightColor: lighten($askColor, 10%);
+$bidColor: #00C853;
+$bidHighlightColor: lighten($bidColor, 5%);
+
+$baseColor: #777;
+$baseHighlightColor: #999;
+$disabledColor: #333;
+$errorColor: #F50057;
+$font: 'Roboto', 'HelveticaNeue', 'Arial', sans-serif;
+$borderSize: 3px;
+$padding: 20px;
+
+$bp: 560px;
+
+$loadingBounceAnim: loading-bounce 1s ease-out infinite;
+@keyframes loading-bounce {
+    0% {
+        margin-left: 0;
+    }
+    50% {
+        margin-left: 5px;
+    }
+    100% {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,41 @@
+.ErrorLabel {
+    $arrowSize: 8px;
+    $padding: 10px;
+    display: block;
+    position: relative;
+    height: $padding * 2 + $arrowSize;
+    // padding-bottom: 1em;
+    &-content {
+        position: absolute;
+        right: 0;
+        top: $arrowSize;
+        // width: 150px;
+        background: $errorColor;
+        padding: 10px;
+        white-space: nowrap;
+        border-radius: $borderSize;
+        color: #fff;
+
+        &:after {
+        	bottom: 100%;
+        	border: solid transparent;
+        	content: " ";
+        	height: 0;
+        	width: 0;
+        	position: absolute;
+        	pointer-events: none;
+        	// border-color: rgba(213, 0, 0, 0);
+        	border-bottom-color: $errorColor;
+        	border-width: $arrowSize;
+        	margin-left: -$arrowSize;
+            left: 50%;
+        }
+        .ErrorLabel--right &:after{
+            right: $arrowSize * 2;
+            left: auto;
+        }
+        .ErrorLabel--left &:after{
+            left: $arrowSize * 2;
+        }
+    }
+}

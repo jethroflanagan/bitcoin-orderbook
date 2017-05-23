@@ -1,0 +1,23 @@
+.Orderbook-tab {
+    @media (max-width: $bp - 1) {
+        border-bottom: 1px solid transparent;
+        &--bids {
+            border-bottom-color: $bidColor;
+        }
+        &--asks {
+            border-bottom-color: $askColor;
+        }
+        &--inactive {
+            background: rgba(0,0,0, 0.4);
+            color: $baseColor;
+            border-bottom-color: transparent;
+            cursor: pointer;
+        }
+
+        &Content {
+            &--inactive {
+                display: none;
+            }
+        }
+    }
+}
